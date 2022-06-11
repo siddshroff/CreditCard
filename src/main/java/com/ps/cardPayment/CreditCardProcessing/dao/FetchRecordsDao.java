@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface FetchRecordsDao {
 
-    public List<Object> getAllCards();
+    List<Object> getAllCards();
 
 }

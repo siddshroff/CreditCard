@@ -6,5 +6,5 @@ import com.ps.cardPayment.CreditCardProcessing.bean.CardDetails;
 
 public interface AddCard {
 
-    public abstract void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException;
+    void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException;
 }

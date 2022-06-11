@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 import AppNavbar from './AppNavbar';
@@ -6,16 +5,17 @@ import { Button, Container, Form, FormGroup, Input, Label, Table } from 'reactst
 class App extends Component {
   state = {
     cards: [],
+
   };
-const [inputs, setInputs] = useState({});
+
   async componentDidMount() {
-    const response = await fetch('/getAll');
+    const response = await fetch('/getAllCards');
     const body = await response.json();
     this.setState({cards: body});
   }
 async handleSubmit(event) {
     event.preventDefault();
-const item = event.target;
+
 
     await fetch('/addCard', {
         method: 'POST',
@@ -26,15 +26,12 @@ const item = event.target;
         body: JSON.stringify(),
     });
 }
-const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
+handleChange(event) {
+
   }
   render() {
   <AppNavbar/>
   const {cards} = this.state;
-  const {item} = this.state;
   const cardsList = cards.map(cards => {
           return <tr key={cards.id}>
           <td style={{whiteSpace: 'nowrap'}}>{cards.name}</td>
@@ -52,17 +49,17 @@ const handleChange = (event) => {
                   <Form onSubmit={this.handleSubmit}>
                       <FormGroup>
                           <Label for="name">Name</Label>
-                          <Input type="text" name="name" id="name" value={inputs.name || ""}
+                          <Input type="text" name="name" id="name"
                                  onChange={this.handleChange} autoComplete="name"/>
                       </FormGroup>
                       <FormGroup>
                           <Label for="cardNo">Card Number</Label>
-                          <Input type="text" name="cardNo" id="cardNo" value={inputs.cardNo || ""}
+                          <Input type="text" name="cardNo" id="cardNo"
                                  onChange={this.handleChange} autoComplete="card Number"/>
                       </FormGroup>
                       <FormGroup>
                           <Label for="limit">Limit</Label>
-                          <Input type="text" name="limit" id="limit" value={inputs.limit || ""}
+                          <Input type="text" name="limit" id="limit"
                                  onChange={this.handleChange} autoComplete="limit"/>
                       </FormGroup>
                       <FormGroup>

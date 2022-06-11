@@ -27,7 +27,6 @@ public class CreditCardProcessingApplication {
         }
     }
 
-    //@Override
     public void run(ApplicationArguments arg0) throws Exception {
         System.out.println("Server started at port:: 8080");
     }
@@ -37,11 +36,12 @@ public class CreditCardProcessingApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/addCard").allowedOrigins("http://localhost*");
+                registry.addMapping("/getAllCards").allowedOrigins("http://localhost*");
             }
         };
     }
-    @RequestMapping(value = "/health")
-    public String hello() {
-        return "Healthy";
-    }
+//    @RequestMapping(value = "/health")
+//    public String health() {
+//        return "{\"Success\":true,\"Message\":\"Healthy\"}";
+//    }
 }

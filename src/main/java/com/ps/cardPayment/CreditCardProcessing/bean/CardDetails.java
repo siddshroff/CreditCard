@@ -4,6 +4,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
@@ -15,11 +17,12 @@ public class CardDetails implements Serializable {
     private static final long serialVersionUID = -7817224776021728682L;
     @Id
     private String Id;
-    @NonNull
+    @NotBlank(message = "Name must not be blank")
     private String name;
-    @NonNull
+    @NotBlank
+    @Digits(integer = 19, fraction = 0, message = "Card number is not valid")
     private String cardNumber;
-    @NonNull
+    @NotBlank(message = "Need to provide limit")
     private String limit;
     private String balance = "0";
 

@@ -20,8 +20,8 @@ public class GetCardsImpl implements GetCards {
      */
 
     public List<Object> getAllCards() {
-        List<Object> lstCards = getAllCards.getAllCards();
-        return lstCards;
+        logger.info("Fetching all cards");
+        return getAllCards.getAllCards();
     }
 
 }

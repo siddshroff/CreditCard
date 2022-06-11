@@ -21,14 +21,18 @@ public class AddCardImpl implements AddCard {
      */
 
     public void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException {
+
         if(checkLuhn(cardDetails.getCardNumber())) {
+            logger.info("Card number is compatible with Luhn10");
             insertCard.saveCardDetails(cardDetails);
         }else{
+            logger.info("Checking if card number is not compatible with Luhn10");
             throw new InvalidCardDetailsException();
         }
     }
     private boolean checkLuhn(String cardNo)
     {
+        logger.info("Checking if card number is compatible with Luhn10");
         int nDigits = cardNo.length();
 
         int nSum = 0;
@@ -38,12 +42,9 @@ public class AddCardImpl implements AddCard {
 
             int d = cardNo.charAt(i) - '0';
 
-            if (isSecond == true)
+            if (isSecond)
                 d = d * 2;
 
-            // We add two digits to handle
-            // cases that make two digits
-            // after doubling
             nSum += d / 10;
             nSum += d % 10;
 
