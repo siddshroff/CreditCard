@@ -26,18 +26,15 @@ public class CardServicesHandler {
     GetCards getCards;
 
     @RequestMapping(value = "/addCard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PostMapping(value= "/addCard")
-    public ResponseEntity insertCardDetails( @Valid @RequestBody CardDetails cardDetails) throws ExceptionHandler {
-        try {
-            logger.info("Attempting insertion of card details");
-            addCardDetails.insertCardDetails(cardDetails);
-            logger.info("Inserted card details successfully");
+    @PostMapping(value = "/addCard")
+    public ResponseEntity insertCardDetails(@Valid @RequestBody CardDetails cardDetails) throws ExceptionHandler {
 
-            return new ResponseEntity<>("{\"Success\":true,\"Message\":\"Card is added successfully\"}", HttpStatus.CREATED);
-        }catch(Exception e){
-            logger.error("Error adding card details",e.getMessage());
-            throw new ProcessingError("Error adding card details");
-        }
+        logger.info("Attempting insertion of card details");
+        addCardDetails.insertCardDetails(cardDetails);
+        logger.info("Inserted card details successfully");
+
+        return new ResponseEntity<>("{\"Success\":true,\"Message\":\"Card is added successfully\"}", HttpStatus.CREATED);
+
     }
 
     @RequestMapping(value = "/getAllCards", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,8 +44,8 @@ public class CardServicesHandler {
             List<Object> cards = getCards.getAllCards();
             return new ResponseEntity<>(new Gson().toJson(cards.stream().map(CardDetails.class::cast)
                     .collect(Collectors.toList())), HttpStatus.OK);
-        }catch(Exception e){
-            logger.error("Error fetching card details",e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error fetching card details", e.getMessage());
             throw new ProcessingError("Error fetching card details");
         }
     }
