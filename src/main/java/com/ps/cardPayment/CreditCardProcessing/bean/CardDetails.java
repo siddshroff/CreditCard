@@ -7,7 +7,14 @@ import org.springframework.data.redis.core.RedisHash;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-
+/**
+ * This entity class refers to card details
+ * record into database.
+ *
+ * @author  Siddharth Shroff
+ * @version 1.0
+ * @since   13-06-2022
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

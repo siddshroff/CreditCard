@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('/getAllCards');
+    const response = await fetch('/card/getAllCards');
     const body = await response.json();
     this.setState({cards: body});
   }

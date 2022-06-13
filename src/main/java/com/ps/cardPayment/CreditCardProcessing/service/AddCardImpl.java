@@ -8,6 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This service class deals with all endpoints related to
+ * adding card details
+ *
+ * @author  Siddharth Shroff
+ * @version 1.0
+ * @since   13-06-2022
+ */
 @Service
 public class AddCardImpl implements AddCard {
 
@@ -16,8 +24,10 @@ public class AddCardImpl implements AddCard {
     @Autowired
     private InsertRecordDaoImpl insertCard;
     /**
-     * @param cardDetails
-     * @return
+     * This method is used to insert card details. This also check
+     * if the card number is according to Luhn10.
+     * @param cardDetails This object has all card details.
+     * @return void This returns nothing.
      */
 
     public void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException {
@@ -30,26 +40,32 @@ public class AddCardImpl implements AddCard {
             throw new InvalidCardDetailsException();
         }
     }
+
+    /**
+     * This method is used to check if the card number is
+     * according to Luhn10. It returns true if it is validated
+     * and false if not.
+     * @param cardNo This is card number fetched from card details provided
+     *               by request body.
+     * @return void This returns nothing.
+     */
     private boolean checkLuhn(String cardNo)
     {
         logger.info("Checking if card number is compatible with Luhn10");
-        int nDigits = cardNo.length();
+        int numberOfDigits = cardNo.length()-1;
 
-        int nSum = 0;
-        boolean isSecond = false;
-        for (int i = nDigits - 1; i >= 0; i--)
+        int sum = 0,i=numberOfDigits;
+        boolean isSecondDigit = false;
+        while (i >= 0)
         {
-
-            int d = cardNo.charAt(i) - '0';
-
-            if (isSecond)
-                d = d * 2;
-
-            nSum += d / 10;
-            nSum += d % 10;
-
-            isSecond = !isSecond;
+            int temp = cardNo.charAt(i) - '0';
+            if (isSecondDigit)
+                temp *= 2;
+            sum += temp / 10;
+            sum += temp % 10;
+            isSecondDigit = !isSecondDigit;
+            i--;
         }
-        return (nSum % 10 == 0);
+        return (sum % 10 == 0);
     }
 }

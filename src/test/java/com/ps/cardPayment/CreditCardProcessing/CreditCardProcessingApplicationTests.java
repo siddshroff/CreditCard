@@ -47,7 +47,7 @@ class CreditCardProcessingApplicationTests {
 		body.put("cardNumber","79927398713");
 		body.put("limit","500");
 
-		this.mockMvc.perform(post("/addCard").accept(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(post("/card/addCard").accept(MediaType.APPLICATION_JSON)
 				.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(body)))
 				.andExpect(status().isCreated());
 	}
@@ -59,7 +59,7 @@ class CreditCardProcessingApplicationTests {
 		body.put("cardNumber","12345");
 		body.put("limit","500");
 
-		this.mockMvc.perform(post("/addCard").accept(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(post("/card/addCard").accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(body)))
 				.andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Card details are invalid")));;
@@ -71,7 +71,7 @@ class CreditCardProcessingApplicationTests {
 		body.put("cardNumber","79927398713");
 		body.put("limit","500");
 
-		this.mockMvc.perform(post("/addCard").accept(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(post("/card/addCard").accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(body)))
 				.andExpect(status().isBadRequest())
 				.andExpect(content().string(containsString("Invalid request body.")));
@@ -79,7 +79,7 @@ class CreditCardProcessingApplicationTests {
 	@Test
 	public void testFetchCards() throws Exception {
 
-		this.mockMvc.perform(get("/getAllCards").accept(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(get("/card/getAllCards").accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}

@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,19 +27,19 @@ public class CardServicesHandler {
     @Autowired
     GetCards getCards;
 
-    @RequestMapping(value = "/addCard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @PostMapping(value = "/addCard")
+    @RequestMapping(value = "/card/addCard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/card/addCard")
     public ResponseEntity insertCardDetails(@Valid @RequestBody CardDetails cardDetails) throws ExceptionHandler {
 
         logger.info("Attempting insertion of card details");
         addCardDetails.insertCardDetails(cardDetails);
         logger.info("Inserted card details successfully");
 
-        return new ResponseEntity<>("{\"Success\":true,\"Message\":\"Card is added successfully\"}", HttpStatus.CREATED);
+        return new ResponseEntity<>(createResponseBody(true,"Card is added successfully"), HttpStatus.CREATED);
 
     }
 
-    @RequestMapping(value = "/getAllCards", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/card/getAllCards", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllCards() {
         try {
             logger.info("Fetching all card details");
@@ -50,4 +52,10 @@ public class CardServicesHandler {
         }
     }
 
+    private String createResponseBody(boolean status, String message) {
+        Map responseMap = new HashMap();
+        responseMap.put("success", status);
+        responseMap.put("message",message);
+        return new Gson().toJson(responseMap);
+    }
 }

@@ -8,6 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This service class deals with all endpoints related to
+ * fetching card details
+ *
+ * @author  Siddharth Shroff
+ * @version 1.0
+ * @since   13-06-2022
+ */
 @Service
 public class GetCardsImpl implements GetCards {
 
@@ -16,7 +24,10 @@ public class GetCardsImpl implements GetCards {
     private FetchRecordsDaoImpl getAllCards;
 
     /**
-     * @return
+     * This method is used to insert card details. This also check
+     * if the card number is according to Luhn10.
+     * @return List This returns list of objects containing card
+     *          details.
      */
 
     public List<Object> getAllCards() {
