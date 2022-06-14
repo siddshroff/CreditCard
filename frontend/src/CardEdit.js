@@ -20,7 +20,7 @@ class CardEdit extends Component {
           event.preventDefault();
           const {cardDetails} = this.state;
 
-          const response = await fetch('/card/addCard', {
+          const response = await fetch('v1/cards', {
               method: 'POST',
               headers: {
                   'Accept': 'application/json',
@@ -48,7 +48,7 @@ class CardEdit extends Component {
 
     return (
     <div>
-    <Container fluid>
+    <Container float-left>
                       <h2>Credit Card System</h2>
 
                       <Form onSubmit={this.handleSubmit}>

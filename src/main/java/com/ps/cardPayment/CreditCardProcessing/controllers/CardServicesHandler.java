@@ -27,7 +27,8 @@ public class CardServicesHandler {
     @Autowired
     GetCards getCards;
 
-    @RequestMapping(value = "/card/addCard", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "v1/cards", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping(value = "/card/addCard")
     public ResponseEntity insertCardDetails(@Valid @RequestBody CardDetails cardDetails) throws ExceptionHandler {
 
@@ -39,7 +40,8 @@ public class CardServicesHandler {
 
     }
 
-    @RequestMapping(value = "/card/getAllCards", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "v1/cards", method = RequestMethod.GET,
+            consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllCards() {
         try {
             logger.info("Fetching all card details");

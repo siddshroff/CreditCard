@@ -5,7 +5,9 @@ import com.ps.cardPayment.CreditCardProcessing.Exceptions.InvalidCardDetailsExce
 import com.ps.cardPayment.CreditCardProcessing.Exceptions.ProcessingError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -35,7 +37,10 @@ public class ExceptionHandler extends Throwable {
     @org.springframework.web.bind.annotation.ExceptionHandler(value = InvalidCardDetailsException.class)
     public ResponseEntity<Object> exception(InvalidCardDetailsException exception) {
         logger.error("Card number is not compatible with Luhn10",exception.getMessage());
-        return new ResponseEntity<>(createResponseBody(true,"Card details are invalid"), HttpStatus.BAD_REQUEST);
+        final HttpHeaders httpHeaders= new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(createResponseBody(true,"Card details are invalid"),
+                httpHeaders, HttpStatus.BAD_REQUEST);
     }
     /**
      * This exception method handles all system related exceptions.
@@ -45,7 +50,10 @@ public class ExceptionHandler extends Throwable {
     @org.springframework.web.bind.annotation.ExceptionHandler(value = ProcessingError.class)
     public ResponseEntity<Object> exception(ProcessingError exception) {
         logger.error("Error processing request", exception.getMessage());
-        return new ResponseEntity<>(createResponseBody(true,"Error processing request"), HttpStatus.INTERNAL_SERVER_ERROR);
+        final HttpHeaders httpHeaders= new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(createResponseBody(true,"Error processing request"),
+                httpHeaders, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     /**
      * This exception method handles invalid body in request.
@@ -56,7 +64,10 @@ public class ExceptionHandler extends Throwable {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<String> handleConstraintViolationException(MethodArgumentNotValidException e) {
         logger.error("Request body parameters not valid", e.getMessage());
-        return new ResponseEntity<>(createResponseBody(true,"Invalid request body."), HttpStatus.BAD_REQUEST);
+        final HttpHeaders httpHeaders= new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(createResponseBody(true,"Invalid request body."),
+                httpHeaders, HttpStatus.BAD_REQUEST);
     }
 
     private String createResponseBody(boolean status, String message) {

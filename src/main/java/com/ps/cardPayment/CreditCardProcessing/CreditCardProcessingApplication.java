@@ -61,8 +61,7 @@ public class CreditCardProcessingApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/card/addCard").allowedOrigins("http://localhost*");
-                registry.addMapping("/card/getAllCards").allowedOrigins("http://localhost*");
+                registry.addMapping("v1/cards").allowedOrigins("http://localhost*");
             }
         };
     }
