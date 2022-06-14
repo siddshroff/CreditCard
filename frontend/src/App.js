@@ -10,7 +10,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('v1/cards',{
+    const response = await fetch('/v1/cards',{
     headers: {
                     'Accept': 'application/json, text/plain',
                     'Content-Type': 'application/json;charset=UTF-8'

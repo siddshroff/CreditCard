@@ -27,9 +27,9 @@ public class CardServicesHandler {
     @Autowired
     GetCards getCards;
 
-    @RequestMapping(value = "v1/cards", method = RequestMethod.POST,
+    @RequestMapping(value = "/v1/cards", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
-    @PostMapping(value = "/card/addCard")
+    @PostMapping(value = "/v1/cards")
     public ResponseEntity insertCardDetails(@Valid @RequestBody CardDetails cardDetails) throws ExceptionHandler {
 
         logger.info("Attempting insertion of card details");
@@ -40,7 +40,7 @@ public class CardServicesHandler {
 
     }
 
-    @RequestMapping(value = "v1/cards", method = RequestMethod.GET,
+    @RequestMapping(value = "/v1/cards", method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE ,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllCards() {
         try {

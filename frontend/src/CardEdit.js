@@ -20,7 +20,7 @@ class CardEdit extends Component {
           event.preventDefault();
           const {cardDetails} = this.state;
 
-          const response = await fetch('v1/cards', {
+          const response = await fetch('/v1/cards', {
               method: 'POST',
               headers: {
                   'Accept': 'application/json',
