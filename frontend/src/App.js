@@ -37,7 +37,7 @@ class App extends Component {
 </div>
         <Container fluid>
               <h3>Existing Cards</h3>
-              <Table className="mt-4">
+              <Table striped bordered hover className="mt-4">
                                   <thead>
                                   <tr>
                                       <th width="30%">Name</th>
@@ -46,7 +46,7 @@ class App extends Component {
                                       <th width="40%">Limit</th>
                                   </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody >
                                   {cardsList}
                                   </tbody>
                               </Table>

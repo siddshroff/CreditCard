@@ -68,7 +68,7 @@ class CardEdit extends Component {
                                      onChange={this.handleChange} autoComplete="limit"/>
                           </FormGroup>
                           <FormGroup>
-                              <Button color="primary" type="submit">Add</Button>{' '}
+                              <Button color="primary" type="submit" color="secondary">Add</Button>{' '}
                           </FormGroup>
                       </Form>
                   </Container>
