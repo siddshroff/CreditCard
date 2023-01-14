@@ -7,7 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+//import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since   13-06-2022
  */
 @SpringBootApplication
-@EnableRedisRepositories
+//@EnableRedisRepositories
 @RestController
 public class CreditCardProcessingApplication {
     private static final Logger logger = LoggerFactory.getLogger(CreditCardProcessingApplication.class);

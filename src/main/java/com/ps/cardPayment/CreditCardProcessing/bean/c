@@ -1,0 +1,7 @@
+create table card_details
+(card_id bigint not null,
+balance varchar(255),
+card_number varchar(255),
+limit varchar(255),
+name varchar(255),
+primary key (card_id))

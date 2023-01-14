@@ -45,7 +45,7 @@ public class CardServicesHandler {
     public ResponseEntity getAllCards() {
         try {
             logger.info("Fetching all card details");
-            List<Object> cards = getCards.getAllCards();
+            List<CardDetails> cards = getCards.getAllCards();
             return new ResponseEntity<>(new Gson().toJson(cards.stream().map(CardDetails.class::cast)
                     .collect(Collectors.toList())), HttpStatus.OK);
         } catch (Exception e) {

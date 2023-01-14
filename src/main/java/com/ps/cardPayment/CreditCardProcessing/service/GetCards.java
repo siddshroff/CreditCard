@@ -1,5 +1,7 @@
 package com.ps.cardPayment.CreditCardProcessing.service;
 
+import com.ps.cardPayment.CreditCardProcessing.bean.CardDetails;
+
 import java.util.List;
 /**
  * This service interface deals with all endpoints related to
@@ -10,5 +12,5 @@ import java.util.List;
  * @since   13-06-2022
  */
 public interface GetCards {
-    List<Object> getAllCards();
+    List<CardDetails> getAllCards();
 }

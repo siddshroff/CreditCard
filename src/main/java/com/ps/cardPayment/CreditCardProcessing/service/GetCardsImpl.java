@@ -1,5 +1,6 @@
 package com.ps.cardPayment.CreditCardProcessing.service;
 
+import com.ps.cardPayment.CreditCardProcessing.bean.CardDetails;
 import com.ps.cardPayment.CreditCardProcessing.dao.FetchRecordsDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class GetCardsImpl implements GetCards {
      *          details.
      */
 
-    public List<Object> getAllCards() {
+    public List<CardDetails> getAllCards() {
         logger.info("Fetching all cards");
         return getAllCards.getAllCards();
     }
