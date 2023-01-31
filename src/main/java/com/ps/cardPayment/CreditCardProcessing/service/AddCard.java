@@ -12,5 +12,5 @@ import com.ps.cardPayment.CreditCardProcessing.bean.CardDetails;
  * @since   13-06-2022
  */
 public interface AddCard {
-    void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException;
+    CardDetails insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException;
 }

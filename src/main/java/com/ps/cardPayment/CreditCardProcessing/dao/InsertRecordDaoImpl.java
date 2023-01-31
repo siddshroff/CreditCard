@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 /**
  * This data access class inserts the card record into database.
  *
@@ -27,14 +25,15 @@ public class InsertRecordDaoImpl {
     /**
      * This data access method is used to insert card details.
      * It generates a unique identifier for card IDs.
+     *
      * @param cardDetails This object has all card details.
-     * @return void This returns nothing.
+     * @return cardDetails This returns cardDetails object back.
      */
-    public void saveCardDetails(CardDetails cardDetails) {
+    public CardDetails saveCardDetails(CardDetails cardDetails) {
         /*UUID uniqueID = UUID.randomUUID();
         cardDetails.setId(uniqueID);*/
         logger.info("Saving card details in database");
-        cardRepository.save(cardDetails);
+        return cardRepository.save(cardDetails);
         //template.opsForHash().putIfAbsent(hashReference, cardDetails.getId(), cardDetails);
     }
 }

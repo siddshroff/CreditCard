@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 /**
  * This service class deals with all endpoints related to
  * adding card details
@@ -26,15 +28,16 @@ public class AddCardImpl implements AddCard {
     /**
      * This method is used to insert card details. This also check
      * if the card number is according to Luhn10.
+     *
      * @param cardDetails This object has all card details.
-     * @return void This returns nothing.
+     * @return CardDetails This returns card details object.
      */
 
-    public void insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException {
+    public CardDetails insertCardDetails(CardDetails cardDetails) throws InvalidCardDetailsException {
 
         if(checkLuhn(cardDetails.getCardNumber())) {
             logger.info("Card number is compatible with Luhn10");
-            insertCard.saveCardDetails(cardDetails);
+            return insertCard.saveCardDetails(cardDetails);
         }else{
             logger.info("Checking if card number is not compatible with Luhn10");
             throw new InvalidCardDetailsException();
@@ -49,23 +52,24 @@ public class AddCardImpl implements AddCard {
      *               by request body.
      * @return void This returns nothing.
      */
-    private boolean checkLuhn(String cardNo)
+    private boolean checkLuhn(Long cardNo)
     {
         logger.info("Checking if card number is compatible with Luhn10");
-        int numberOfDigits = cardNo.length()-1;
-
-        int sum = 0,i=numberOfDigits;
-        boolean isSecondDigit = false;
-        while (i >= 0)
-        {
-            int temp = cardNo.charAt(i) - '0';
-            if (isSecondDigit)
-                temp *= 2;
-            sum += temp / 10;
-            sum += temp % 10;
-            isSecondDigit = !isSecondDigit;
-            i--;
+        int numberOfDigits = (int) (Math.log10(cardNo) + 1);
+        int [] tempArray = new int[numberOfDigits];
+        for (int i = numberOfDigits-1; i >= 0; i--) {
+            tempArray[i]= (int) (cardNo%10);
+            cardNo/=10;
         }
+        for (int i = numberOfDigits-2; i >=0; i=i-2) {
+            int j = tempArray[i];
+            j = j * 2;
+            if (j > 9) {
+                j = j % 10 + 1;
+            }
+            tempArray[i] = j;
+        }
+        int sum = Arrays.stream(tempArray).sum();
         return (sum % 10 == 0);
     }
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 /**
  * This entity class refers to card details
@@ -32,15 +33,17 @@ public class CardDetails implements Serializable {
     @NotBlank(message = "Name must not be blank")
     @Column(name = "name")
     private String name;
-    @NotBlank
+
+    @NotNull
     @Digits(integer = 19, fraction = 0, message = "Card number is not valid")
     @Column(name = "card_number")
-    private String cardNumber;
-    @NotBlank(message = "Need to provide limit")
+    private Long cardNumber;
+
+    @NotNull
     @Column(name = "`limit`")
-    private String limit;
+    private Long limit;
     @Column(name = "balance")
-    private String balance = "0";
+    private Long balance = 0l;
 
     public CardDetails(CardDetails cardDetails) {
     }

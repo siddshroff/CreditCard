@@ -50,7 +50,7 @@ class CardEdit extends Component {
     <div>
     <Container float-left>
                       <h2>Credit Card System</h2>
-
+                      <h4> Add </h4>
                       <Form onSubmit={this.handleSubmit}>
                           <FormGroup>
                               <Label for="name">Name</Label>
